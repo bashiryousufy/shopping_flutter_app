@@ -21,5 +21,5 @@ samples, guidance on mobile development, and a full API reference.
 ## Screenshots
 
 <p>
-  <img src='Screenshots/Screenshot1.png' width='350' height='450'>
+  <img src='Screenshots/Screenshot1.png' width='350' height='650'>
 </p>
