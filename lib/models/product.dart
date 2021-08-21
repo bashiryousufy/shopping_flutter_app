@@ -31,28 +31,27 @@ class Product {
     required this.updatedAt,
     required this.productApiUrl,
     required this.apiFeaturedImage,
-    required this.productColors,
   });
 
-  int id;
+  int? id;
   Brand? brand;
-  String name;
-  String price;
+  String? name;
+  String? price;
   dynamic priceSign;
   dynamic currency;
-  String imageLink;
-  String productLink;
-  String websiteLink;
-  String description;
-  double rating;
-  String category;
-  String productType;
-  List<dynamic> tagList;
-  DateTime createdAt;
-  DateTime updatedAt;
-  String productApiUrl;
-  String apiFeaturedImage;
-  List<ProductColor> productColors;
+  String? imageLink;
+  String? productLink;
+  String? websiteLink;
+  String? description;
+  double? rating;
+  String? category;
+  String? productType;
+  List<dynamic>? tagList;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  String? productApiUrl;
+  String? apiFeaturedImage;
+
   var isFavorite = false.obs;
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
@@ -74,8 +73,6 @@ class Product {
         updatedAt: DateTime.parse(json["updated_at"]),
         productApiUrl: json["product_api_url"],
         apiFeaturedImage: json["api_featured_image"],
-        productColors: List<ProductColor>.from(
-            json["product_colors"].map((x) => ProductColor.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -92,39 +89,17 @@ class Product {
         "rating": rating == null ? null : rating,
         "category": category == null ? null : category,
         "product_type": productType,
-        "tag_list": List<dynamic>.from(tagList.map((x) => x)),
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
+        "tag_list": List<dynamic>.from(tagList!.map((x) => x)),
+        "created_at": createdAt!.toIso8601String(),
+        "updated_at": updatedAt!.toIso8601String(),
         "product_api_url": productApiUrl,
         "api_featured_image": apiFeaturedImage,
-        "product_colors":
-            List<dynamic>.from(productColors.map((x) => x.toJson())),
       };
 }
 
 enum Brand { MAYBELLINE }
 
 final brandValues = EnumValues({"maybelline": Brand.MAYBELLINE});
-
-class ProductColor {
-  ProductColor({
-    required this.hexValue,
-    required this.colourName,
-  });
-
-  String hexValue;
-  String colourName;
-
-  factory ProductColor.fromJson(Map<String, dynamic> json) => ProductColor(
-        hexValue: json["hex_value"],
-        colourName: json["colour_name"] == null ? null : json["colour_name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "hex_value": hexValue,
-        "colour_name": colourName == null ? null : colourName,
-      };
-}
 
 class EnumValues<T> {
   late Map<String, T> map;
