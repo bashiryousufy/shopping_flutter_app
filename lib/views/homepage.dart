@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:shopping_app/controllers/product_controller.dart';
+import 'package:shopping_app/views/product_tile.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -46,20 +47,24 @@ class HomePage extends StatelessWidget {
           ),
           Expanded(
             child: Obx(
-              () => StaggeredGridView.countBuilder(
-                crossAxisCount: 2,
-                itemCount: productController.productList.length,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 100,
-                    width: 100,
-                    color: Colors.red,
+              () {
+                if (productController.isLoading.value) {
+                  return Center(child: CircularProgressIndicator());
+                } else {
+                  return StaggeredGridView.countBuilder(
+                    crossAxisCount: 2,
+                    itemCount: productController.productList.length,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    itemBuilder: (context, index) {
+                      return ProductTile(
+                        productController.productList[index],
+                      );
+                    },
+                    staggeredTileBuilder: (index) => StaggeredTile.fit(1),
                   );
-                },
-                staggeredTileBuilder: (index) => StaggeredTile.fit(1),
-              ),
+                }
+              },
             ),
           ),
         ],
