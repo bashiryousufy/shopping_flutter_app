@@ -19,3 +19,7 @@ samples, guidance on mobile development, and a full API reference.
 - https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline
 
 ## Screenshots
+
+<p>
+  <img src='Screenshots/Screenshot1.png'>
+</p>
